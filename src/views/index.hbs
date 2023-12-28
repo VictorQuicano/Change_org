@@ -2,36 +2,18 @@
   <div class="card-header bg-dark">
     <h3 class="card-title text-white">
       <i class="far fa-image"></i>
-      UPLOAD IMAGE
+      Cuentanos de tu proyecto
     </h3>
   </div>
   <div class="card-body">
     <form action="/images" method="POST" enctype="multipart/form-data">
-      <div class="form-group">
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Choose File"
-            readonly
-            id="selectedFileName"
-          />
-          <label class="input-group-btn">
-            <span class="btn btn-primary">
-              <i class="glyphicon glyphicon-folder-open"></i>
-              Browse
-              <input type="file" name="image" style="display: none;" onchange="document.getElementById('selectedFileName').value = this.files[0].name" required />
-            </span>
-          </label>
-        </div>
-      </div>
 
       <div class="form-group mb-3">
         <input
           type="text"
           name="title"
           class="form-control"
-          placeholder="Title for the image"
+          placeholder="¿Cómo se llama tu proyecto?"
           required
         />
       </div>
@@ -41,14 +23,33 @@
           name="description"
           rows="2"
           class="form-control"
-          placeholder="Description for the image"
+          placeholder="¿En qué consiste?"
           required
         ></textarea>
       </div>
 
       <div class="form-group">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Muestranos un poco de tu proyecto"
+            readonly
+            id="selectedFileName"
+          />
+          <label class="input-group-btn">
+            <span class="btn btn-primary">
+              <i class="glyphicon glyphicon-folder-open"></i>
+              Imagen
+              <input type="file" name="image" style="display: none;" onchange="document.getElementById('selectedFileName').value = this.files[0].name" required />
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
         <button class="btn btn-success">
-          <i class="fa fa-upload"></i>Upload Image
+          <i class="fa fa-upload"></i>Publicar Proyecto
         </button>
       </div>
 
@@ -58,19 +59,24 @@
 
 <div class="card mt-2">
   <div class="card-header bg-dark text-white">
-    <h3><i class="far fa-images"></i> Uploads</h3>
+    <h3><i class="far fa-images"></i> Nuevos proyectos</h3>
   </div>
   <div class="card-body">
     <div class="row">
       {{#each images}}
-        <div class="col-md-4 text-center">
+        <div class="col">
           <a href="/images/{{uniqueId}}">
-            <img
-              src="/public/upload/{{filename}}"
-              alt="{{title}}"
-              class="w-100 h-100 img-thumbnail"
-            />
+            <img src="/public/upload/{{filename}}" class="img-thumbnail w-70" alt="{{title}}">
           </a>
+        </div>
+        <div class="col">
+          <blockquote class="w-100">
+            <p>{{title}}</p>
+              <footer class="blockquote-footer">
+                <span>{{description}}</span><br/>
+              <span><i class="fas fa-likes"></i>{{likes}}</span>
+              </footer>
+          </blockquote>
         </div>
       {{/each}}
     </div>
