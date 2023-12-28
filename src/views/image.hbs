@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h2>{{image.title}}</h2>
-    <button class="btn btn-danger" id="btn-delete" data-id="{{image.uniqueId}}">
+    <button type="button" class="btn btn-outline-danger" id="btn-delete" data-id="{{image.uniqueId}}">
       <i class="fa fa-times"></i>
       Delete
     </button>
@@ -17,32 +17,86 @@
     </div>
   </div>
   <div class="card-footer d-flex justify-content-between align-items-center">
-    <button class="btn btn-success" id="btn-like" data-id="{{image.filename}}">
-      <i class="fas fa-thumbs-up"></i>
-      Like
-    </button>
-    <p>
-      <span class="likes-count"> {{image.likes}}</span>
-      <i class="fas fa-heart"></i>
-    </p>
-    <p>
-      <i class="fas fa-eye"></i>
-      {{image.views}}
-    </p>
-    <p>
-      <i class="far fa-clock"></i>
-      {{timeago image.timestamp}}
-    </p>
-
+    <div class="d-flex">
+        <!-- Botones al lado izquierdo -->
+        <button class="btn btn-outline-success me-2" id="btn-like" data-id="{{image.filename}}">
+            <i class="fas fa-thumbs-up"></i>
+            Like
+        </button>
+        <button class="btn btn-outline-info me-2" id="btn-donate" data-id="{{image.filename}}">
+            <i class="fa fa-credit-card"></i>
+            Donar
+        </button>
+    </div>
+    
+    <!-- Elementos al lado derecho -->
+    <div class="d-flex">
+        <p class="me-3">
+            <span class="likes-count">{{image.likes}}</span>
+            <i class="fas fa-heart"></i>
+        </p>
+        <p class="me-3">
+            <span class="donate-count">{{image.donations}}</span>
+            <i class="fa fa-heartbeat" aria-hidden="true"></i>
+        </p>
+        <p class="me-3">
+            <i class="fas fa-eye"></i>
+            {{image.views}}
+        </p>
+        <p>
+            <i class="far fa-clock"></i>
+            {{timeago image.timestamp}}
+        </p>
+    </div>
   </div>
+  <div class="card-body">
+    <blockquote id="post-donation">
+    <form action="/images/{{image.uniqueId}}/donate" method="POST" class="row">
+        <div class="col-md-6 mb-3">
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Nombre"
+            />
+        </div>
+        <div class="col-md-6 mb-3">
+            <input
+                type="number"
+                class="form-control"
+                id="donation"
+                name="donation"
+                rows="2"
+                placeholder="¿Cuánto deseas donar :D? (PEN)"
+            ></input>
+        </div>
+        <div class="col-md-12 mb-3">
+            <input
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="E-mail"
+            />
+        </div>
+        <div class="col-md-12 mb-3 ml-auto">
+            <button class="btn btn-outline-primary" id="btn-donations">
+                <i class="fa fa-comment"></i>
+                Enviar Donativo
+            </button>
+        </div>
+    </form>
+</blockquote>
+    </div>
 </div>
 
 <div class="card mt-2">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h3>Comments</h3>
-    <button class="btn btn-info" id="btn-toggle-comment">
+    <h3>Comentarios</h3>
+    <button class="btn btn-outline-primary" id="btn-toggle-comment">
       <i class="fa fa-comment-o"></i>
-      Post a Comment
+      Publicar Comentarios
     </button>
   </div>
   <div class="card-body">

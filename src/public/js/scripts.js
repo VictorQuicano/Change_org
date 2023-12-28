@@ -1,8 +1,14 @@
 $('#post-comment').hide();
+$('#post-donation').hide();
 
 $('#btn-toggle-comment').click(function(e){
     e.preventDefault();
     $('#post-comment').slideToggle();
+})
+
+$('#btn-donate').click(function(e){
+    e.preventDefault();
+    $('#post-donation').slideToggle();
 })
 
 $('#btn-like').click(function(e) {

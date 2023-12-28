@@ -65,15 +65,27 @@ ctrl.like = async (req, res) => {
   const image = await Image.findOne({
     filename: { $regex: req.params.image_id },
   });
-  //console.log(image.filename);
-  //console.log(image.filename.$regex);
-
   if (image) {
     image.likes += 1;
     await image.save();
     res.json({ likes: image.likes });
   } else {
     res.status(500).json({ error: "Internal error" });
+  }
+};
+ctrl.donate = async (req, res) => {
+  console.log(req.body);
+  const image = await Image.findOne({
+    filename: { $regex: req.params.image_id },
+  });
+  if (image) {
+    const donationAmount = parseInt(req.body.donation, 10);
+    image.donations +=  donationAmount
+    await image.save();
+    res.redirect("/images/" + image.uniqueId);
+
+  } else {
+    res.redirect("/");
   }
 };
 
