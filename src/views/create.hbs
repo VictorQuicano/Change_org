@@ -1,0 +1,86 @@
+<div class="card">
+  <div class="card-header bg-dark">
+    <h3 class="card-title text-white">
+      <i class="far fa-image"></i>
+      Cuentanos de tu proyecto
+    </h3>
+  </div>
+  <div class="card-body">
+    <form action="/images" method="POST" enctype="multipart/form-data">
+
+      <div class="form-group mb-3">
+        <input
+          type="text"
+          name="title"
+          class="form-control"
+          placeholder="¿Cómo se llama tu proyecto?"
+          required
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <textarea
+          name="description"
+          rows="2"
+          class="form-control"
+          placeholder="¿En qué consiste?"
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Muestranos un poco de tu proyecto"
+            readonly
+            id="selectedFileName"
+          />
+          <label class="input-group-btn">
+            <span class="btn btn-primary">
+              <i class="glyphicon glyphicon-folder-open"></i>
+              Imagen
+              <input type="file" name="image" style="display: none;" onchange="document.getElementById('selectedFileName').value = this.files[0].name" required />
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-success">
+          <i class="fa fa-upload"></i>Publicar Proyecto
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="card mt-2">
+  <div class="card-header bg-dark text-white">
+    <h3><i class="far fa-images"></i> Nuevos proyectos</h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      {{#each images}}
+        <div class="d-flex align-items-center">
+          <div class="col d-inline-block align-top">
+            <a href="/images/{{uniqueId}}">
+              <img src="/public/upload/{{filename}}" class="img-thumbnail" alt="{{title}}" width="300">
+            </a>
+          </div>
+          <div class="col">
+            <blockquote class="w-100">
+              <h1 >{{title}}</h1>
+                <footer class="blockquote-footer pt-3">
+                  <span>{{description}}</span><br/><br/>
+                <span><i class="fa fa-thumbs-up"></i>{{likes}}</span>
+                </footer>
+            </blockquote>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

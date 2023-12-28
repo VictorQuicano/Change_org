@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const home = require('../controllers/home');
-const image = require('../controllers/image');
+const home = require("../controllers/home");
+const image = require("../controllers/image");
 
 module.exports= app => {
     router.get('/' , home.index) 
@@ -15,6 +15,5 @@ module.exports= app => {
     router.post('/images/:image_id/donate' , image.donate)
 
 
-    app.use(router);
-    
-}
+  app.use(router);
+};
